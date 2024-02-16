@@ -1,0 +1,109 @@
+React
+
+    Introduction to React Fiber
+
+Introduction to React Fiber
+
+Of course, React is a popular JavaScript library that is used by developers to create complex and modern UIs (user interfaces). To identify which elements are to be rendered after certain changes are made by the developer, React uses a "reconciler", an algorithm that helps it compare two DOM trees and diff them with one another. React Fiber helps do this better.
+Table of Contents
+
+    What is React Fiber?
+    What is the purpose of React Fiber?
+    What are the features of React Fiber?
+    How does React Fiber work?
+    FAQs
+
+What is React Fiber?
+
+    React Fiber is a backwards compatible, complete rewrite of the React core. In other words, it is a reimplementation of older versions of the React reconciler.
+
+Introduced from React 16, Fiber Reconciler is the new reconciliation algorithm in React. The term Fiber refers to React's data structure (or) architecture, and originates from 'fiber' - a representation of a node of the DOM tree.
+What is the purpose of React Fiber?
+
+Improved performance
+
+    React Fiber is aimed at improving the perceived performance for complex React applications. It does so by allowing React to break the limits of the call stack. This lets it pause or start rendering work whenever required.
+
+Better suitability for advanced UI
+
+    React Fiber also increases the suitability of the React library to create animations, layouts, and gestures.
+
+Control over the "priority" of work
+
+    Through its feature of incremental rendering, React Fiber lets developers split rendering work into smaller chunks and distribute it over multiple frames. This allows users to essentially control the "priority" of work.
+
+    For example, React Fiber could help you prioritise functions that originate from user actions while delaying logic of less-important background or offscreen functions to avoid frame rate drops.
+
+More fluid experience
+
+    So by breaking up the work into smaller chunks that can be paused, resumed, or aborted based on a set priority order, React Fiber helps apps deliver a more fluid experience. Fiber lets React fine-tune the rendering to ensure that the most common use-cases (or) the most important updates are computed at the earliest.
+    Specifically, it helps improve the speed of rendering components at start-up, as they could be made available to the browser before the entire bundle finishes downloading.
+
+What are the features of React Fiber?
+
+React Fiber brings in a host of new capabilities, such as:
+
+    Supporting better error handling and recovering from errors
+    Rendering subtrees into DOM node containers (Portals)
+    Support for new render return types like fragments and strings
+    Returning multiple elements from a render function
+
+How does React Fiber work?
+
+To understand how React Fiber works, we must first understand what used to happen in React before Fiber.
+React before React Fiber
+
+    React creates a tree of nodes when the UI renders for the very first time, with each node representing a React element. React creates a virtual tree (called virtualDOM), a clone of the rendered DOM tree.
+    React then traverses the tree, updating the DOM on which classes or elements needed to be updated, whenever a change is required to be rendered. This is called Reconciliation.
+    Essentially, after any UI update, React compares every node from two trees, and passes on the cumulative changes to the renderer.
+
+    But, before Fiber, reconciliation and rendering to the DOM weren't separated, and React couldn't pause its traversal to jump to other renders in between. This often resulted in lagging inputs and choppy frame rates.
+
+    In other words, with reconciliation forced to be without interruption (or "synchronous"), render changes couldn't be inserted in the middle. This prevented higher-priority changes from being made until the stack was completely cleared.
+
+How does React Fiber work?
+
+Fiber brings in different levels of priority for updates in React. It breaks the computation of the component tree into nodes, or 'units' of work that it can commit at any time. This allows React to pause, resume or restart computation for various components.
+
+Fiber allows the reconciliation and rendering to the DOM to be split into two separate phases:
+
+Phase 1: Reconciliation
+
+    In the first phase, React creates a list of all changes to be rendered in the UI (an 'effect list', comprising of new and updated components).
+    Once the list is fully computed, React will schedule these changes to be executed in the next phase.
+    Note that React doesn't make any actual changes in this phase.
+
+Phase 2: Commit
+
+    In phase two, also called 'commit' phase, React tells the DOM to render the effect list that was created in the previous phase.
+    While the Reconciliation phase can be interrupted, the Commit phase cannot.
+
+    So via Fiber, React is able to traverse the component tree through a singly linked list tree traversal algorithm. This algorithm can run in an "asynchronous" manner - allowing React to pause and resume work at particular nodes.
+
+FAQs
+What is a fiber?
+
+A fiber is a JavaScript object, a unit of work. It represents a node of the DOM tree, or a React element, and contains data about a component, its I/P and O/P.
+
+A component instance, at any single point in time, has two fibers associated with it:
+
+    The current, flushed fiber, and
+    The work-in-progress fiber
+
+What is DOM?
+
+The DOM, or the Document Object Model, is a browser interface that lets scripts change what's rendered on a web page. React makes manipulating the DOM easier, although it can ne manipulated using VanillaJS.
+What is the reconciler?
+
+The reconciler is an algorithm that helps React compare two DOM trees and diff them with one another, to determine the changes to be made.
+
+Fiber is nothing but the the React Fiber reconciler. As seen, it helps React split reconciliation and rendering into two separate phases - where the reconciler computes the changes to be made, and the renderer updates the app.
+Trending Articles
+How to Evaluate Freelance Developers: Questions to Ask
+Introduction to ng-template in Angular
+Angular vs React: Which One to Choose for Your App
+Recent Articles
+How to Craft a Freelance Resume as a Developer
+Dev Shops – What are they, and when to use them?
+Upwork Reviews & Alternatives for Hiring Developers
+Join our Community
